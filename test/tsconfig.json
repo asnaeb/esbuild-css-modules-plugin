@@ -1,0 +1,11 @@
+{
+    "extends": "../tsconfig.json",
+    "compilerOptions": {
+        "plugins": [{ "name": "typescript-plugin-css-modules" }],
+        "module": "NodeNext",
+        "moduleResolution": "node",
+        "noEmit": true
+    },
+    "include": ["in", "Modules.d.ts", "../lib"],
+    "exclude": ["out"]
+}

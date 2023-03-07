@@ -1,0 +1,12 @@
+.my-class {
+    color: red;
+    width: 100px;
+}
+
+#my-id {
+    color: blue
+}
+
+.my-other-class img {
+    width: 40%
+}
