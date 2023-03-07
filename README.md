@@ -17,7 +17,7 @@ esbuild.build({
         // Optional. Will emit a single `.css` file containing all of the css modules content.
         emitCssBundle: {
             // Optional. Defaults to the value of `outdir`
-            path: 'static/css'
+            path: 'static/css',
             // Required. Will append `.css` at the end if missing
             filename: 'bundle'
         }
