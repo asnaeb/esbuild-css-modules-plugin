@@ -1,6 +1,6 @@
 {
   "name": "@asn.aeb/esbuild-css-modules-plugin",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "esbuild plugin for css-modules that works for client bundles and ssr",
   "keywords": [
     "esbuild",
