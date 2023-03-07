@@ -16,7 +16,8 @@
     "prebuild": "rm -r lib &",
     "build": "tsc",
     "pretest": "tsc",
-    "test": "node test/esbuild.mjs"
+    "test": "node test/esbuild.mjs",
+    "prepublishOnly": "npm run build"
   },
   "author": "asnaeb",
   "license": "GPL-3.0-or-later",

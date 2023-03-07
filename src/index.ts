@@ -13,7 +13,6 @@ export interface CssModulesOptions {
 }
 
 let js: string | null 
-let css: string | null
 
 function generateJS(buildOptions: BuildOptions, pluginOptions?: CssModulesOptions) {
     const postcssModules = postcssModulesPlugin({
@@ -33,6 +32,8 @@ function generateJS(buildOptions: BuildOptions, pluginOptions?: CssModulesOption
 }
 
 export function cssModulesPlugin(options?: CssModulesOptions): Plugin {
+    let css: string
+
     return {
         name: 'css-modules',
         setup(build) {
@@ -104,7 +105,6 @@ export function cssModulesPlugin(options?: CssModulesOptions): Plugin {
                     }
 
                     js = null
-                    css = null
                     
                     return
                 })  
