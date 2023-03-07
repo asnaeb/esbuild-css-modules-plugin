@@ -1,8 +1,15 @@
 {
   "name": "@asn.aeb/esbuild-css-modules-plugin",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "esbuild plugin for css-modules that works for client bundles and ssr",
-  "keywords": ["esbuild", "ssr", "css-modules", "plugin", "bundle", "css"],
+  "keywords": [
+    "esbuild",
+    "ssr",
+    "css-modules",
+    "plugin",
+    "bundle",
+    "css"
+  ],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
