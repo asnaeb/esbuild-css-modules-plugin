@@ -28,7 +28,7 @@ esbuild.build({
 ```
 **Example 2** - **Server Side Rendering** 
 
-Preserving the folder structure without bundling, transforming `.module.css` into `module.js`. This example uses [glob](https://www.npmjs.com/package/glob) for pattern matching.
+Preserve the folder structure without bundling, transform `.module.css` into `module.js`. This example uses [glob](https://www.npmjs.com/package/glob) for pattern matching.
 ```javascript
 esbuild.build({
     // `.css` files must be included in entryPoints when `bundle: false`

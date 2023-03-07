@@ -1,5 +1,5 @@
 import type {Plugin, BuildOptions, Loader} from 'esbuild'
-import {readFile, writeFile} from 'node:fs/promises'
+import {mkdir, readFile, writeFile} from 'node:fs/promises'
 import {extname, join, parse, resolve} from 'node:path'
 import postcss from 'postcss'
 import postcssModulesPlugin from 'postcss-modules'
@@ -100,6 +100,12 @@ export function cssModulesPlugin(options?: CssModulesOptions): Plugin {
                             if (!path.endsWith('.css')) {
                                 path += '.css'
                             }
+
+                            try {
+                                await mkdir(dir, {recursive: true})
+                            } 
+                            catch {}
+
                             await writeFile(path, css)
                         }
                     }
