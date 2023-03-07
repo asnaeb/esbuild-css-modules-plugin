@@ -1,12 +1,14 @@
 # esbuild CSS Modules Plugin
 
-This plugin has been made because none of the actual css-modules plugins allow to work with Server-Side-Rendering and the ones that do, are outdated. In this initial iteration, it works in two ways:
+This plugin has been made because none of the actual css-modules plugins allow to work with Server-Side-Rendering and the ones that do, are outdated. In this initial iteration, it can:
 
-1. For use with `bundle: true`: Bundles css class names into the `js` bundles and output a single `.css` file containing all the css from `*.module.css`'s with correct identifiers. Ideal for client side stuff where you want to bundle everything.
-2. For use with `bundle: false`: Creates `*.module.js` files in place of `*.module.css` and updates `import` or `require` statements accordingly. Ideal for SSR where you want to output the html with the correct class names. The `.css` bundle can still be emitted.
+1. With `bundle: true`: Bundle css hashed class names into entrypoints bundles and outputs a single `.css` file containing all the css from `*.module.css`'s with correct identifiers. Ideal for client side stuff where you want to bundle everything.
+2. With `bundle: false`: Create `*.module.js` files in place of `*.module.css` and updates `import` or `require` statements accordingly in output files. Ideal for SSR where you want to output the html with the correct class names. A `.css` bundle can still be emitted.
 
 # Usage
-Use case 1 - Bundle `js` files and create a single `bundle.css` file as well.
+**Example 1** - **Client Side Bundles**
+
+Bundle `js` files and create a single `bundle.css` file as well at the desired location.
 ```javascript
 esbuild.build({
     entryPoints: ['src/index.tsx'],
@@ -14,7 +16,7 @@ esbuild.build({
     outdir: 'static/js',
     bundle: true
     plugins: [cssModulesPlugin({
-        // Optional. Will emit a single `.css` file containing all of the css modules content.
+        // Optional. Will emit a `.css` bundle containing all of the imported css.
         emitCssBundle: {
             // Optional. Defaults to the value of `outdir`
             path: 'static/css',
@@ -24,7 +26,9 @@ esbuild.build({
     })]
 })
 ```
-Use case 2 - Upload the files to the server for SSR, preserving the folder structure without bundling. This example uses [glob]() for pattern matching.
+**Example 2** - **Server Side Rendering** 
+
+Preserving the folder structure without bundling, transforming `.module.css` into `module.js`. This example uses [glob](https://www.npmjs.com/package/glob) for pattern matching.
 ```javascript
 esbuild.build({
     // `.css` files must be included in entryPoints when `bundle: false`

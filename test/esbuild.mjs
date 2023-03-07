@@ -12,13 +12,14 @@ catch {}
 
 try {
     await esbuild.build({
-        entryPoints: await glob('test/in/**/*.{ts,css}'),
+        entryPoints: ['test/in/index.ts'],
         outdir: 'test/out',
-        outbase: 'test/in',
-        allowOverwrite: true,
-        format: 'esm',
-        splitting: true,
-        plugins: [cssModulesPlugin()],
+        bundle: true,
+        plugins: [cssModulesPlugin({
+            emitCssBundle: {
+                filename: 'asne'
+            }
+        })],
     })
 }
 
