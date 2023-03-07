@@ -11,6 +11,7 @@
     "css"
   ],
   "repository": "https://github.com/asnaeb/esbuild-css-modules-plugin.git",
+  "files": ["lib"],
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
