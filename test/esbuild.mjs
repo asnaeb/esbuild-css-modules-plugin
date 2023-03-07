@@ -12,14 +12,13 @@ catch {}
 
 try {
     await esbuild.build({
-        entryPoints: await glob('test/in/index.ts'),
+        entryPoints: await glob('test/in/**/*.{ts,css}'),
         outdir: 'test/out',
         outbase: 'test/in',
         allowOverwrite: true,
         format: 'esm',
         splitting: true,
         plugins: [cssModulesPlugin()],
-        bundle: true
     })
 }
 
