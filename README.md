@@ -1,9 +1,15 @@
 # esbuild CSS Modules Plugin
 
+[![npm package](https://img.shields.io/badge/npm-0.1.9-blue)](https://www.npmjs.com/package/@asn.aeb/esbuild-css-modules-plugin)
+
 This plugin has been made because none of the actual css-modules plugins allow to work with Server-Side-Rendering and the ones that do, are outdated. In this initial iteration, it can:
 
 1. With `bundle: true`: Bundle css hashed class names into entrypoints bundles and outputs a single `.css` file containing all the css from `*.module.css`'s with correct identifiers. Ideal for client side stuff where you want to bundle everything.
 2. With `bundle: false`: Create `*.module.js` files in place of `*.module.css` and updates `import` or `require` statements accordingly in output files. Ideal for SSR where you want to output the html with the correct class names. A `.css` bundle can still be emitted.
+
+# Installation
+
+`npm i -D @asn.aeb/esbuild-css-modules-plugin`
 
 # Usage
 **Example 1** - **Client Side Bundles**
