@@ -3,6 +3,7 @@ import {mkdir, readFile, writeFile} from 'node:fs/promises'
 import {extname, join, parse, resolve} from 'node:path'
 import postcss from 'postcss'
 import postcssModulesPlugin from 'postcss-modules'
+import * as sass from 'sass';
 
 export interface CssModulesOptions {
     emitCssBundle?: {
@@ -58,16 +59,36 @@ export function cssModulesPlugin(options?: CssModulesOptions): Plugin {
                     }
                 })
 
+                build.onLoad({filter: /\.module\.(scss|sass)$/}, async args => {
+                    const compiledCss = sass.compile(args.path);
+                    const postcssModules = generateJS(build.initialOptions, options)
+                    const postcssResult = await postcss(postcssModules).process(compiledCss.css, {
+                        from: args.path,
+                        to: build.initialOptions.outdir,
+                    })
+
+                    if (options?.emitCssBundle && postcssResult.css) {
+                        css ??= ''
+                        css += postcssResult.css + '\n\n'
+                    }
+
+                    if (js) {
+                        return {
+                            contents: js
+                        }
+                    }
+                })
+
                 if (!build.initialOptions.bundle) {                    
                     build.onLoad({filter: /\.(js|jsx|ts|tsx)$/}, async args => {
                         let loader: Loader | undefined
                         let file = await readFile(args.path, 'utf-8')
                         
                         const extension = extname(args.path)
-                        const matches = file.match(/(import|require).+\.module.css/g)
+                        const matches = file.match(/(import|require).+\.module.(css|scss|sass)/g)
 
                         if (matches) for (const match of matches) {
-                            const toJS = match.replace('.module.css', '.module.js')
+                            const toJS = match.replace(/module.(css|scss|sass)/, 'module.js')
                             const path = match.replace(/(import|require).+(\'|\")/, '')
                             const fullPath = resolve(join(parse(args.path).dir, path))
 

@@ -12,12 +12,45 @@ catch {}
 
 try {
     await esbuild.build({
-        entryPoints: ['test/in/index.ts'],
-        outdir: 'test/out',
+        entryPoints: ['test/in/css/index.ts'],
+        outdir: 'test/out/css',
         bundle: true,
         plugins: [cssModulesPlugin({
             emitCssBundle: {
                 filename: 'asne'
+            }
+        })],
+    })
+
+    await esbuild.build({
+        entryPoints: ['test/in/scss/index.ts'],
+        outdir: 'test/out/scss',
+        bundle: true,
+        plugins: [cssModulesPlugin({
+            emitCssBundle: {
+                filename: 'scss'
+            }
+        })],
+    })
+
+    await esbuild.build({
+        entryPoints: ['test/in/sass/index.ts'],
+        outdir: 'test/out/sass',
+        bundle: true,
+        plugins: [cssModulesPlugin({
+            emitCssBundle: {
+                filename: 'sass'
+            }
+        })],
+    })
+
+    await esbuild.build({
+        entryPoints: ['test/in/mixed/index.ts'],
+        outdir: 'test/out/mixed',
+        bundle: true,
+        plugins: [cssModulesPlugin({
+            emitCssBundle: {
+                filename: 'mixed'
             }
         })],
     })
